@@ -1,37 +1,38 @@
 let currentPlayer = 'X';
-const cells = document.querySelectorAll('.cell');
+        const cells = document.querySelectorAll('.cell');
 
-function makeMove(cell) {
-    if (cell.textContent === '') {
-        cell.textContent = currentPlayer;
-        cell.classList.add(currentPlayer);
-        
-        if (checkWin()) {
-            alert(currentPlayer + 'の勝利！');
-            resetBoard();
-        } else if (checkDraw()) {
-            alert('引き分け');
-            resetBoard();
-        } else {
-            currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+        function makeMove(cell) {
+            if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
+                cell.classList.add(currentPlayer);
+
+                if (checkWin()) {
+                    setTimeout(() => {
+                        alert(currentPlayer + 'の勝利！');
+                        resetBoard();
+                    }, 100);
+                } else if (checkDraw()) {
+                    setTimeout(() => {
+                        alert('引き分け');
+                        resetBoard();
+                    }, 100);
+                } else {
+                    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                }
+            }
         }
-    }
-}
 
-function checkWin() {
-    // 勝利条件をチェックするロジックを実装する
-    // 例: 横・縦・斜めのいずれかで同じ記号が揃ったらtrueを返す
-}
+        function checkWin() {
+            // 勝利条件をチェックするロジックを実装する
+        }
 
-function checkDraw() {
-    // 引き分け条件をチェックするロジックを実装する
-    // 例: 全てのセルが埋まった場合にtrueを返す
-}
 
-function resetBoard() {
-    cells.forEach(cell => {
-        cell.textContent = '';
-        cell.classList.remove('X', 'O');
-    });
-    currentPlayer = 'X';
-}
+        function checkDraw() {
+            // 引き分け条件をチェックするロジックを実装する
+        }
+
+        function resetBoard() {
+            cells.forEach(cell => {
+                cell.classList.remove('X', 'O');
+            });
+            currentPlayer = 'X';
+        }
