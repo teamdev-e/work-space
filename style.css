@@ -8,6 +8,7 @@ body {
     grid-template-columns: repeat(3, 100px);
     grid-gap: 5px;
     margin-top: 30px;
+    justify-content: center;
 }
 
 .cell {
