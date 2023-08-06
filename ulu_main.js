@@ -20,7 +20,8 @@ function makeMove(cell, board) {
 
         if (checkWin(board)) {
             setTimeout(() => {
-                alert(currentPlayer + 'の勝利！');
+                //alert(currentPlayer + 'の勝利！');
+                displayWinner(currentPlayer, board);
                 resetBoard();
             }, 100);
         } else if (checkDraw(board)) {
@@ -34,7 +35,14 @@ function makeMove(cell, board) {
     }
 }
 
+function displayWinner(player, board) {
+    const winnerElement = document.createElement('div');
+    winnerElement.classList.add('winner-marker');
+    winnerElement.textContent = player;
 
+    board.appendChild(winnerElement);
+    board.classList.add('winner-board');
+}
 
 function checkWin(board) {
     // boardのセルを取得

@@ -3,6 +3,7 @@ body {
     text-align: center;
 }
 
+
 .small_board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
