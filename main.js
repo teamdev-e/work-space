@@ -1,6 +1,24 @@
 let currentPlayer = 'X';
     const cells = document.querySelectorAll('.cell');
 
+// ラジオボタンの値の取得
+const gameModeForm = document.getElementById('gameModeForm');
+const resetButton = document.querySelector('.reset-button');
+
+let isComputerPlayer = false;
+
+gameModeForm.addEventListener('change', function() {
+    const selectedMode = gameModeForm.elements['mode'].value;
+    isComputerPlayer = (selectedMode === '1');
+    resetBoard();
+});
+
+cells.forEach(cell => {
+    cell.addEventListener('click', () => {
+        makeMove(cell);
+    });
+});
+
     function makeMove(cell) {
         if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
             cell.classList.add(currentPlayer);
@@ -17,6 +35,10 @@ let currentPlayer = 'X';
                     }, 100);
                 } else {
                     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+
+                    if (isComputerPlayer && currentPlayer === 'O') {
+                        makeComputerMove();
+                    }
                 }
             }
         }
@@ -54,4 +76,22 @@ let currentPlayer = 'X';
             cell.classList.remove('X', 'O');
         });
         currentPlayer = 'X';
+        if (isComputerPlayer && currentPlayer === 'O') {
+            makeComputerMove();
+        }
+
     }
+
+    function makeComputerMove() {
+        const emptyCells = Array.from(cells).filter(cell => !cell.classList.contains('X') && !cell.classList.contains('O'));
+        
+        if (emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const selectedCell = emptyCells[randomIndex];
+            setTimeout(() => {
+                makeMove(selectedCell);
+            }, 800); 
+        }
+    }
+
+    resetButton.addEventListener('click', resetBoard);
