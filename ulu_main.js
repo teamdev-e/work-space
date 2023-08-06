@@ -1,37 +1,53 @@
-
 // 現在のプレイヤーを管理
 let currentPlayer = 'X';
 const cells = document.querySelectorAll('.cell');
+let current_board_index;
+let flag=false;
 
 const smallBoards = document.querySelectorAll('.small_board');
 
-smallBoards.forEach(board => {
-    const cells = board.querySelectorAll('.cell');
-    cells.forEach(cell => {
-        cell.addEventListener('click', () => makeMove(cell, board));
-    });
-});
+console.log(smallBoards)
+const board1 = document.querySelector('.board1');
+const board2 = document.querySelector('.board2');
+const board3 = document.querySelector('.board3');
+const board4 = document.querySelector('.board4');
+const board5 = document.querySelector('.board5');
+const board6 = document.querySelector('.board6');
+const board7 = document.querySelector('.board7');
+const board8 = document.querySelector('.board8');
+const board9 = document.querySelector('.board9');
 
 
 // ゲームの進行や結果表示を処理
 function makeMove(cell, board) {
-    if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
-        cell.classList.add(currentPlayer);
-
-        if (checkWin(board)) {
-            setTimeout(() => {
-                //alert(currentPlayer + 'の勝利！');
-                displayWinner(currentPlayer, board);
-                resetBoard();
-            }, 100);
-        } else if (checkDraw(board)) {
-            setTimeout(() => {
-                alert('引き分け');
-                resetBoard();
-            }, 100);
-        } else {
-            currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+    if(board===smallBoards[current_board_index] | !flag){
+        if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
+            if(flag){
+                smallBoards[current_board_index].classList.remove('next-board');
+            }
+            current_board_index = Array.from(cell.parentElement.children).indexOf(cell);
+            console.log(`Clicked cell at row ${current_board_index}`);
+            cell.classList.add(currentPlayer);
+            smallBoards[current_board_index].classList.remove('next-board');
+            if (checkWin(board)) {
+                setTimeout(() => {
+                    //displayWinner(currentPlayer, board);
+                    alert(currentPlayer+'の勝利');
+                    resetBoard();
+                }, 100);
+            } else if (checkDraw(board)) {
+                setTimeout(() => {
+                    alert('引き分け');
+                    resetBoard();
+                }, 100);
+            } else {
+                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                smallBoards[current_board_index].classList.add('next-board');
+                flag=true;
+            }
         }
+    }else{
+        alert('指定のマス内でクリックしてください')
     }
 }
 
@@ -83,4 +99,13 @@ function checkDraw(board) {
         }
     }
     return true; 
+}
+
+function resetBoard() {
+    cells.forEach(cell => {
+        cell.classList.remove('X', 'O');
+    });
+    currentPlayer = 'X';
+    smallBoards[current_board_index].classList.remove('next-board');
+    flag=false;
 }
