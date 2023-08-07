@@ -3,10 +3,12 @@ let currentPlayer = 'X';
 const cells = document.querySelectorAll('.cell');
 let current_board_index;
 let flag=false;
+let flag_2=false;
+let before;
 
 const smallBoards = document.querySelectorAll('.small_board');
 
-console.log(smallBoards)
+console.log(smallBoards);
 const board1 = document.querySelector('.board1');
 const board2 = document.querySelector('.board2');
 const board3 = document.querySelector('.board3');
@@ -17,33 +19,62 @@ const board7 = document.querySelector('.board7');
 const board8 = document.querySelector('.board8');
 const board9 = document.querySelector('.board9');
 
+// ローカルボードの勝者を保存する配列
+const localBoardWinners = [null, null, null, null, null, null, null, null, null];
+
 
 // ゲームの進行や結果表示を処理
 function makeMove(cell, board) {
-    if(board===smallBoards[current_board_index] | !flag){
+    if(board===smallBoards[current_board_index] || !flag){
         if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
             if(flag){
                 smallBoards[current_board_index].classList.remove('next-board');
             }
             current_board_index = Array.from(cell.parentElement.children).indexOf(cell);
-            console.log(`Clicked cell at row ${current_board_index}`);
+            // console.log(`Clicked cell at row ${current_board_index}`);
             cell.classList.add(currentPlayer);
             smallBoards[current_board_index].classList.remove('next-board');
             if (checkWin(board)) {
-                setTimeout(() => {
-                    //displayWinner(currentPlayer, board);
+                // ローカルボードの勝者を設定
+                // setLocalBoardWinner(current_board_index, currentPlayer);
+        
+                // setTimeout(() => {
                     alert(currentPlayer+'の勝利');
-                    resetBoard();
-                }, 100);
+                    fillBoardWithWinner(board, currentPlayer);
+                
+                    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                    smallBoards[current_board_index].classList.add('next-board');
+                    localBoardWinners[before] = currentPlayer;
+                    console.log(before, current_board_index);
+                    before = current_board_index;
+                    flag=true;
+                // }, 100);
+            
+                console.log('win');
+    
+                console.log(localBoardWinners);
+
             } else if (checkDraw(board)) {
                 setTimeout(() => {
                     alert('引き分け');
-                    resetBoard();
+                    
+                    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                    smallBoards[current_board_index].classList.add('next-board');
+                    flag=true;
                 }, 100);
             } else {
+                before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
                 smallBoards[current_board_index].classList.add('next-board');
                 flag=true;
+
+                console.log('else');
+            }
+            
+            if (localBoardWinners[current_board_index] !== null){
+                console.log("abc");
+                smallBoards[before].classList.remove('next-board');
+                flag=false;
             }
         }
     }else{
@@ -108,4 +139,25 @@ function resetBoard() {
     currentPlayer = 'X';
     smallBoards[current_board_index].classList.remove('next-board');
     flag=false;
+}
+
+// function setLocalBoardWinner(boardIndex, winner) {
+//     localBoardWinners[boardIndex] = winner;
+// }
+
+// function displayWinnerOnBoard(board, winner) {
+//     const winnerElement = document.createElement('div');
+//     winnerElement.classList.add('winner-marker');
+//     winnerElement.textContent = winner;
+
+//     board.appendChild(winnerElement);
+//     board.classList.add('winner-board');
+// }
+
+function fillBoardWithWinner(board, winner) {
+    const cells = board.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.classList.remove('X', 'O');
+        cell.classList.add(winner);
+    });
 }
