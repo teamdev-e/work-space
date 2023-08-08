@@ -1,6 +1,7 @@
 let currentPlayer = 'X';
     const cells = document.querySelectorAll('.cell');
-
+    const gameSelector = document.getElementById('gameSelector');
+    let savedGames = [];
     function makeMove(cell) {
         if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
             cell.classList.add(currentPlayer);
@@ -55,3 +56,43 @@ let currentPlayer = 'X';
         });
         currentPlayer = 'X';
     }
+
+    
+    function saveGame() {
+        const gameData = {
+            currentPlayer: currentPlayer,
+            cellClasses: Array.from(cells).map(cell => cell.className)
+        };
+    
+        savedGames.push(gameData);
+        if (savedGames.length > 5) {
+            savedGames.shift();
+        }
+    
+        updateGameSelector();
+    
+        localStorage.setItem('ticTacToeSavedGames', JSON.stringify(savedGames));
+    }
+    
+
+    function loadGame() {
+        const selectedIndex = gameSelector.value;
+        if (savedGames[selectedIndex]) {
+            const gameData = savedGames[selectedIndex];
+            currentPlayer = gameData.currentPlayer;
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].className = gameData.cellClasses[i];
+            }
+        }
+    }
+    
+    function updateGameSelector() {
+        gameSelector.innerHTML = '';
+        for (let i = savedGames.length - 1; i >= 0; i--) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.text = 'Game ' + (savedGames.length - i);
+        gameSelector.appendChild(option);
+        }
+        }
+    
