@@ -96,6 +96,9 @@ function makeMove(cell, board) {
             if(globalCheckWin()){
                 alert(currentPlayer+"の勝利！おめでとう！");
                 resetBoard();
+            }else if(globalCheckDraw()){
+                alert("引き分け　お疲れさん！");
+                resetBoard();
             }
             console.log(localBoardWinners);
         }
@@ -127,7 +130,7 @@ function checkWin(board) {
 
     return false;
 }
-
+/*
 function checkDraw() {
     for (const cell of cells) {
         if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
@@ -136,6 +139,7 @@ function checkDraw() {
     }
     return true; 
 }
+*/
 function checkDraw(board) {
     const cells = board.querySelectorAll('.cell');
     for (const cell of cells) {
@@ -148,11 +152,15 @@ function checkDraw(board) {
 
 function resetBoard() {
     cells.forEach(cell => {
-        cell.classList.remove('X', 'O');
+        cell.classList.remove('X', 'O','D');
     });
     currentPlayer = 'X';
     smallBoards[current_board_index].classList.remove('next-board');
     flag=false;
+    flag_2=false;
+    for(let i=0;i<localBoardWinners.length;i++){
+        localBoardWinners[i]=null;
+    }
 }
 
 
@@ -185,4 +193,14 @@ function globalCheckWin() {
     }
     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
     return false;
+}
+
+function globalCheckDraw(){
+    const cells = localBoardWinners;
+    for(let i=0;i<cells.length;i++){
+        if(cells[i]===null){
+            return false;
+        }
+    }
+    return true;
 }
