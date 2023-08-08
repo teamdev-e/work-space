@@ -27,7 +27,7 @@ const localBoardWinners = [null, null, null, null, null, null, null, null, null]
 // ゲームの進行や結果表示を処理
 function makeMove(cell, board) {
     if(board===smallBoards[current_board_index] || !flag){
-        if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
+        if (!cell.classList.contains('X') && !cell.classList.contains('O') &&!cell.classList.contains('D')) {
             if(flag){
                 smallBoards[current_board_index].classList.remove('next-board');
             }
@@ -35,7 +35,7 @@ function makeMove(cell, board) {
             cell.classList.add(currentPlayer);
             smallBoards[current_board_index].classList.remove('next-board');
             
-            console.log(cell.parentElement.children);
+            //console.log(cell.parentElement.children);
             console.log(boards);
 
             if (checkWin(board)) {
@@ -47,7 +47,7 @@ function makeMove(cell, board) {
                     localBoardWinners[Array.from(boards).indexOf(board)] = currentPlayer;
                 }
 
-                console.log(before, current_board_index);
+                console.log('win'+before, current_board_index);
                     
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
@@ -60,11 +60,20 @@ function makeMove(cell, board) {
 
             } else if (checkDraw(board)) {
                     alert('引き分け');
-                    
+                    fillBoardWithWinner(board, 'D');
+                    if (!flag_2){
+                        localBoardWinners[before] = '/';
+                    }else{
+                        localBoardWinners[Array.from(boards).indexOf(board)] = '/';
+                    }
+                    before = current_board_index;
                     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
                     smallBoards[current_board_index].classList.add('next-board');
                     flag=true;
-                
+                    flag_2=false;
+
+                    console.log('draw');
+                    console.log(localBoardWinners);
             } else {
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';

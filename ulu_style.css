@@ -52,6 +52,12 @@ body {
     background-color: #d0d0d0;
 }
 
+.cell.D::before{
+    content: '/';
+}
+
+
+
 .reset-button {
     margin-top: 20px;
     padding: 10px 20px;
