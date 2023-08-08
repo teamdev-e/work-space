@@ -93,6 +93,11 @@ function makeMove(cell, board) {
                 console.log(before, current_board_index);
                 console.log("abc");
             }
+            if(globalCheckWin()){
+                alert(currentPlayer+"の勝利！おめでとう！");
+                resetBoard();
+            }
+            console.log(localBoardWinners);
         }
     }else{
         alert('指定のマス内でクリックしてください');
@@ -157,4 +162,27 @@ function fillBoardWithWinner(board, winner) {
         cell.classList.remove('X', 'O');
         cell.classList.add(winner);
     });
+}
+
+function globalCheckWin() {
+    // boardのセルを取得
+
+    const cells = localBoardWinners;
+    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+    // 勝利条件のパターン
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横の勝利条件
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦の勝利条件
+        [0, 4, 8], [2, 4, 6] // 斜めの勝利条件
+    ];
+    for (const pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (cells[a]===currentPlayer &&
+            cells[b]===currentPlayer &&
+            cells[c]===currentPlayer) {
+            return true;
+        }
+    }
+    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+    return false;
 }
