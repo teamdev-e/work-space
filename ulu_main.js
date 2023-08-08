@@ -5,6 +5,7 @@ let current_board_index;
 let flag=false;
 let flag_2=false;
 let before;
+const boards = document.querySelectorAll('.local_board');
 
 const smallBoards = document.querySelectorAll('.small_board');
 
@@ -31,65 +32,64 @@ function makeMove(cell, board) {
                 smallBoards[current_board_index].classList.remove('next-board');
             }
             current_board_index = Array.from(cell.parentElement.children).indexOf(cell);
-            // console.log(`Clicked cell at row ${current_board_index}`);
             cell.classList.add(currentPlayer);
             smallBoards[current_board_index].classList.remove('next-board');
-            if (checkWin(board)) {
-                // ローカルボードの勝者を設定
-                // setLocalBoardWinner(current_board_index, currentPlayer);
-        
-                // setTimeout(() => {
-                    alert(currentPlayer+'の勝利');
-                    fillBoardWithWinner(board, currentPlayer);
-                
-                    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-                    smallBoards[current_board_index].classList.add('next-board');
-                    localBoardWinners[before] = currentPlayer;
-                    console.log(before, current_board_index);
-                    before = current_board_index;
-                    flag=true;
-                // }, 100);
             
+            console.log(cell.parentElement.children);
+            console.log(boards);
+
+            if (checkWin(board)) {
+                alert(currentPlayer+'の勝利');
+                fillBoardWithWinner(board, currentPlayer);
+                if (!flag_2){
+                    localBoardWinners[before] = currentPlayer;
+                }else{
+                    localBoardWinners[Array.from(boards).indexOf(board)] = currentPlayer;
+                }
+
+                console.log(before, current_board_index);
+                    
+                before = current_board_index;
+                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                smallBoards[current_board_index].classList.add('next-board');
+                flag=true;
+                flag_2=false;
+                
                 console.log('win');
-    
                 console.log(localBoardWinners);
 
             } else if (checkDraw(board)) {
-                setTimeout(() => {
                     alert('引き分け');
                     
                     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
                     smallBoards[current_board_index].classList.add('next-board');
                     flag=true;
-                }, 100);
+                
             } else {
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
                 smallBoards[current_board_index].classList.add('next-board');
                 flag=true;
-
+                flag_2=false;
+                
+                console.log(before, current_board_index);
                 console.log('else');
             }
             
             if (localBoardWinners[current_board_index] !== null){
-                console.log("abc");
                 smallBoards[before].classList.remove('next-board');
                 flag=false;
+                flag_2=true;
+
+                console.log(before, current_board_index);
+                console.log("abc");
             }
         }
     }else{
-        alert('指定のマス内でクリックしてください')
+        alert('指定のマス内でクリックしてください');
     }
 }
 
-function displayWinner(player, board) {
-    const winnerElement = document.createElement('div');
-    winnerElement.classList.add('winner-marker');
-    winnerElement.textContent = player;
-
-    board.appendChild(winnerElement);
-    board.classList.add('winner-board');
-}
 
 function checkWin(board) {
     // boardのセルを取得
@@ -141,18 +141,6 @@ function resetBoard() {
     flag=false;
 }
 
-// function setLocalBoardWinner(boardIndex, winner) {
-//     localBoardWinners[boardIndex] = winner;
-// }
-
-// function displayWinnerOnBoard(board, winner) {
-//     const winnerElement = document.createElement('div');
-//     winnerElement.classList.add('winner-marker');
-//     winnerElement.textContent = winner;
-
-//     board.appendChild(winnerElement);
-//     board.classList.add('winner-board');
-// }
 
 function fillBoardWithWinner(board, winner) {
     const cells = board.querySelectorAll('.cell');
