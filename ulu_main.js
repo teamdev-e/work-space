@@ -9,6 +9,12 @@ const boards = document.querySelectorAll('.local_board');
 
 const smallBoards = document.querySelectorAll('.small_board');
 
+const turn = document.getElementById("turn");
+turn.innerHTML="X's turn";
+
+const gameSelector = document.getElementById('gameSelector');
+let savedGames = [];
+
 console.log(smallBoards);
 const board1 = document.querySelector('.board1');
 const board2 = document.querySelector('.board2');
@@ -51,6 +57,7 @@ function makeMove(cell, board) {
                     
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                turn.innerHTML=currentPlayer+"'s turn";
                 smallBoards[current_board_index].classList.add('next-board');
                 flag=true;
                 flag_2=false;
@@ -68,6 +75,7 @@ function makeMove(cell, board) {
                     }
                     before = current_board_index;
                     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                    turn.innerHTML=currentPlayer+"'s turn";
                     smallBoards[current_board_index].classList.add('next-board');
                     flag=true;
                     flag_2=false;
@@ -77,6 +85,7 @@ function makeMove(cell, board) {
             } else {
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                turn.innerHTML=currentPlayer+"'s turn";
                 smallBoards[current_board_index].classList.add('next-board');
                 flag=true;
                 flag_2=false;
@@ -204,3 +213,47 @@ function globalCheckDraw(){
     }
     return true;
 }
+
+
+function saveGame() {
+    const gameData = {
+        currentPlayer: currentPlayer,
+        cellClasses: Array.from(cells).map(cell => cell.className)
+    };
+
+    savedGames.push(gameData);
+    if (savedGames.length > 5) {
+        savedGames.shift();
+    }
+
+    updateGameSelector();
+
+    localStorage.setItem('ticTacToeSavedGames', JSON.stringify(savedGames));
+}
+
+
+function loadGame() {
+    const selectedIndex = gameSelector.value;
+    if (savedGames[selectedIndex]) {
+        const gameData = savedGames[selectedIndex];
+        currentPlayer = gameData.currentPlayer;
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].className = gameData.cellClasses[i];
+        }
+    }
+}
+
+function updateGameSelector() {
+    gameSelector.innerHTML = '';
+    for (let i = savedGames.length - 1; i >= 0; i--) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.text = 'Game ' + (savedGames.length - i);
+    gameSelector.appendChild(option);
+    }
+}
+
+const backButton = document.getElementById("back");
+backButton.addEventListener("click", () => {
+    window.location.href = "index.html"; // ゲーム画面に遷移
+});

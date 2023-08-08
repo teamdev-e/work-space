@@ -6,9 +6,15 @@ let savedGames = [];
 const gameModeForm = document.getElementById('gameModeForm');
 let isComputerPlayer = false;
 
+const turn = document.getElementById("turn");
+turn.innerHTML="X's turn";
+
 gameModeForm.addEventListener('change', function() {
     const selectedMode = gameModeForm.elements['mode'].value;
     isComputerPlayer = (selectedMode === '1');
+    if(selectedMode === '3'){
+            window.location.href = "ulu_index.html"; // ゲーム画面に遷移
+    }
     resetBoard();
 });
 
@@ -18,74 +24,80 @@ cells.forEach(cell => {
     });
 });
 
-function makeMove(cell) {
-    if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
-        cell.classList.add(currentPlayer);
-            if (checkWin()) {
-                    alert(currentPlayer + 'の勝利！');
-                    resetBoard();
-                    return
-            }
-            } else if (checkDraw()) {
-                    alert('引き分け');
-                    resetBoard();
-                    return;
-            } else {
-                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-                if (isComputerPlayer && currentPlayer === 'O') {
-                    makeComputerMove();
-            }
-        }
-    }
-    
-function checkWin() {
-    const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横の勝利条件
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦の勝利条件
-        [0, 4, 8], [2, 4, 6] // 斜めの勝利条件
-    ];
-
-    for (const pattern of winPatterns) {
-        const [a, b, c] = pattern;
-        if (cells[a].classList.contains(currentPlayer) &&
-            cells[b].classList.contains(currentPlayer) &&
-            cells[c].classList.contains(currentPlayer)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-function checkDraw() {
-    for (const cell of cells) {
+    function makeMove(cell) {
         if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
-            return false; 
+            cell.classList.add(currentPlayer);
+
+                if (checkWin()) {
+                    setTimeout(() => {
+                        alert(currentPlayer + 'の勝利！');
+                        resetBoard();
+                    }, 100);
+                } else if (checkDraw()) {
+                    setTimeout(() => {
+                        alert('引き分け');
+                        resetBoard();
+                    }, 100);
+                } else {
+                    currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+                    turn.innerHTML=currentPlayer+"'s turn";
+                    if (isComputerPlayer && currentPlayer === 'O') {
+                        makeComputerMove();
+                    }
+                }
+            }
+        }
+        
+    function checkWin() {
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横の勝利条件
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦の勝利条件
+            [0, 4, 8], [2, 4, 6] // 斜めの勝利条件
+        ];
+
+        for (const pattern of winPatterns) {
+            const [a, b, c] = pattern;
+            if (cells[a].classList.contains(currentPlayer) &&
+                cells[b].classList.contains(currentPlayer) &&
+                cells[c].classList.contains(currentPlayer)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function checkDraw() {
+        for (const cell of cells) {
+            if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
+                return false; 
+            }
+        }
+        return true; 
+    }
+
+    function resetBoard() {
+        cells.forEach(cell => {
+            cell.classList.remove('X', 'O');
+        });
+        currentPlayer = 'X';
+        if (isComputerPlayer && currentPlayer === 'O') {
+            makeComputerMove();
+        }
+
+    }
+
+    function makeComputerMove() {
+        const emptyCells = Array.from(cells).filter(cell => !cell.classList.contains('X') && !cell.classList.contains('O'));
+        
+        if (emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const selectedCell = emptyCells[randomIndex];
+            setTimeout(() => {
+                makeMove(selectedCell);
+            }, 800); 
         }
     }
-    return true; 
-}
-
-function resetBoard() {
-    cells.forEach(cell => {
-        cell.classList.remove('X', 'O');
-    });
-    currentPlayer = 'X';
-    if (isComputerPlayer && currentPlayer === 'O') {
-        makeComputerMove();
-    }
-}
-
-
-function makeComputerMove() {
-    const emptyCells = Array.from(cells).filter(cell => !cell.classList.contains('X') && !cell.classList.contains('O'));
-    
-    if (emptyCells.length > 0) {
-        const randomIndex = Math.floor(Math.random() * emptyCells.length);
-        const selectedCell = emptyCells[randomIndex];
-        makeMove(selectedCell);
-    }
-}
 
 
 function saveGame() {

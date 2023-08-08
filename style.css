@@ -50,3 +50,7 @@ body {
 .reset-button:hover {
     background-color: #0056b3;
 }
+
+.turn,h1{
+    font-family: "Arial Black","Times New Roman", Times, sans-serif;
+}

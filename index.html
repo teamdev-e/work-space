@@ -12,10 +12,13 @@
 
     <form id="gameModeForm">
         <label>
-            <input type="radio" name="mode" value="1"> 1Player  
+            <input type="radio" name="mode" value="1"> 1人で遊ぶ
         </label>
         <label>
-            <input type="radio" name="mode" value="2" checked> 2Player  
+            <input type="radio" name="mode" value="2" checked> 2人で遊ぶ  
+        </label>
+        <label>
+            <input type="radio" name="mode" value="3"> Ultimateモードで対戦  
         </label>
     </form>
     
@@ -34,6 +37,7 @@
     <button class="save-button" onclick="saveGame()">保存</button>
     <button class="load-button" onclick="loadGame()">呼び出し</button>
     <select id="gameSelector"></select>
+    <div id="turn" class="turn"></div>
     <script src="main.js"></script>
 </body>
 </html>

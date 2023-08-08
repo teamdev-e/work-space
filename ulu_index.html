@@ -116,7 +116,12 @@
             </div>
         </div>
     </div>
-    <button class="reset-button" onclick="resetBoard()">リセット</button>
+    <div id="turn" class="turn"></div>
+    <button class="menu-button" onclick="resetBoard()">リセット</button>
+    <button class="menu-button" onclick="saveGame()">保存</button>
+    <button class="menu-button" onclick="loadGame()">呼び出し</button>
+    <select id="gameSelector" class="menu-button"></select>
+    <button id="back" class="menu-button">戻る</button>
     <script src="ulu_main.js"></script>
 </body>
 </html>
