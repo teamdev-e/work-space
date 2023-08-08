@@ -9,6 +9,16 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
+
+    <form id="gameModeForm">
+        <label>
+            <input type="radio" name="mode" value="1"> 1Player  
+        </label>
+        <label>
+            <input type="radio" name="mode" value="2" checked> 2Player  
+        </label>
+    </form>
+    
     <div class="board">
         <div class="cell" onclick="makeMove(this)"></div>
         <div class="cell" onclick="makeMove(this)"></div>
