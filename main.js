@@ -110,7 +110,9 @@ function makeComputerMove() {
 
 
 function saveGame() {
+    const timestamp = new Date().toLocaleString();
     const gameData = {
+        timestamp: timestamp,
         currentPlayer: currentPlayer,
         cellClasses: Array.from(cells).map(cell => cell.className)
     };
@@ -142,7 +144,8 @@ function updateGameSelector() {
     for (let i = savedGames.length - 1; i >= 0; i--) {
     const option = document.createElement('option');
     option.value = i;
-    option.text = '直近' + (savedGames.length - i)+'番目に保存したゲームを呼び出す';
+    const gameData = savedGames[i];
+    option.text = `${savedGames.length - i}:保存日 ${gameData.timestamp}`;
     gameSelector.appendChild(option);
     }
 }

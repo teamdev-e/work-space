@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,10 +34,10 @@
         <div class="cell" onclick="makeMove(this)"></div>
         <div class="cell" onclick="makeMove(this)"></div>
     </div>
-    <button class="menu-button" onclick="resetBoard()">リセット</button>
-    <button class="menu-button" onclick="saveGame()">保存</button>
-    <select id="gameSelector" class="menu-button"></select>
     <div id="turn" class="turn"></div>
+    <button class="menu-button single" onclick="resetBoard()">リセット</button>
+    <button class="menu-button single" onclick="saveGame()">保存</button>
+    <select id="gameSelector" class="menu-button"></select>
     <script src="main.js"></script>
 </body>
 </html>

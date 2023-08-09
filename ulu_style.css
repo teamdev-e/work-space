@@ -70,6 +70,10 @@ body {
     transition: background-color 0.3s;
 }
 
+.menu-button:active{
+    background-color: #dae335;
+}
+
 .reset-button:hover {
     background-color: #0056b3;
 }

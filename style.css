@@ -52,5 +52,11 @@ body {
 }
 
 .turn,h1{
+    margin: 2vh;
     font-family: "Arial Black","Times New Roman", Times, sans-serif;
+    font-size: large;
+}
+
+.menu-button:active{
+    background-color: #dae335;
 }
