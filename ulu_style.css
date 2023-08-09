@@ -6,10 +6,10 @@ body {
 
 .small_board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
+    grid-template-columns: repeat(3, 50px);
     grid-gap: 5px;
-    margin-top: 30px;
-    margin-right: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
     justify-content: center;
 }
 
@@ -29,8 +29,8 @@ body {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     background-color: #f0f0f0;
     display: flex;
     align-items: center;

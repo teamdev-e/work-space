@@ -15,6 +15,14 @@ turn.innerHTML="X's turn";
 const gameSelector = document.getElementById('gameSelector');
 let savedGames = [];
 
+window.onload = function() {
+    const savedGamesJSON = localStorage.getItem('ultimateTicTacToeSavedGames');
+    if (savedGamesJSON) {
+        savedGames = JSON.parse(savedGamesJSON);
+        updateGameSelector();
+    }
+};
+
 console.log(smallBoards);
 const board1 = document.querySelector('.board1');
 const board2 = document.querySelector('.board2');
@@ -218,7 +226,12 @@ function globalCheckDraw(){
 function saveGame() {
     const gameData = {
         currentPlayer: currentPlayer,
-        cellClasses: Array.from(cells).map(cell => cell.className)
+        cellClasses: Array.from(cells).map(cell => cell.className),
+        nextBoardIndex: current_board_index, 
+        recordBoards: smallBoards,
+        recordLocalBoardWinners: localBoardWinners,
+        recordFlag:flag,
+        recordFlag2:flag_2
     };
 
     savedGames.push(gameData);
@@ -228,7 +241,7 @@ function saveGame() {
 
     updateGameSelector();
 
-    localStorage.setItem('ticTacToeSavedGames', JSON.stringify(savedGames));
+    localStorage.setItem('ultimateTicTacToeSavedGames', JSON.stringify(savedGames));
 }
 
 
@@ -236,10 +249,22 @@ function loadGame() {
     const selectedIndex = gameSelector.value;
     if (savedGames[selectedIndex]) {
         const gameData = savedGames[selectedIndex];
-        currentPlayer = gameData.currentPlayer;
+        flag=gameData.recordFlag;
+        flag_2=gameData.flag_2;
+        if(flag){
+            smallBoards[current_board_index].classList.remove('next-board');
+            current_board_index = gameData.nextBoardIndex; 
+            smallBoards[current_board_index].classList.add('next-board');
+        }else{
+            smallBoards[current_board_index].classList.remove('next-board');
+            current_board_index = gameData.nextBoardIndex; 
+        }
         for (let i = 0; i < cells.length; i++) {
             cells[i].className = gameData.cellClasses[i];
         }
+        localBoardWinners = gameData.localBoardWinners; 
+        turn.innerHTML = currentPlayer + "'s turn";
+        console.log(localBoardWinners);
     }
 }
 
@@ -248,7 +273,7 @@ function updateGameSelector() {
     for (let i = savedGames.length - 1; i >= 0; i--) {
     const option = document.createElement('option');
     option.value = i;
-    option.text = 'Game ' + (savedGames.length - i);
+    option.text = '直近' + (savedGames.length - i)+'番目に保存したゲームを呼び出す';
     gameSelector.appendChild(option);
     }
 }
@@ -256,4 +281,9 @@ function updateGameSelector() {
 const backButton = document.getElementById("back");
 backButton.addEventListener("click", () => {
     window.location.href = "index.html"; // ゲーム画面に遷移
+});
+
+
+gameSelector.addEventListener('change', function() {
+    loadGame();
 });
