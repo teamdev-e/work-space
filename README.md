@@ -22,7 +22,7 @@ Tic Tac Toe とは三目並べです。
 
 Ultimate Tic Tac Toe は３×３の格子状に並べられた Tic Tac Toeの勝敗を使って三目並べをするUltimateなゲームです。  
 こちらのゲームモードは2人対戦です。1人で遊ばれる場合は、一人二役での対戦となります。ご了承ください。  
-詳しくはこちらをご覧ください。[Wikipedia](https://ja.wikipedia.org/wiki/スーパー〇×ゲーム)  
+詳しくは[こちら](https://ja.wikipedia.org/wiki/スーパー〇×ゲーム) をご覧ください。   
 <br/>
 
 
