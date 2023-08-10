@@ -1,4 +1,3 @@
-// 現在のプレイヤーを管理
 let currentPlayer = 'X';
 const cells = document.querySelectorAll('.cell');
 let current_board_index;
@@ -34,11 +33,9 @@ const board7 = document.querySelector('.board7');
 const board8 = document.querySelector('.board8');
 const board9 = document.querySelector('.board9');
 
-// ローカルボードの勝者を保存する配列
 let localBoardWinners = [null, null, null, null, null, null, null, null, null];
 
 
-// ゲームの進行や結果表示を処理
 function makeMove(cell, board) {
     play();
     if(board===smallBoards[current_board_index] || !flag){
@@ -51,7 +48,7 @@ function makeMove(cell, board) {
             smallBoards[current_board_index].classList.remove('next-board');
             
             //console.log(cell.parentElement.children);
-            console.log(boards);
+            //console.log(boards);
 
             if (checkWin(board)) {
                 alert(currentPlayer+'の勝利');
@@ -62,7 +59,7 @@ function makeMove(cell, board) {
                     localBoardWinners[Array.from(boards).indexOf(board)] = currentPlayer;
                 }
 
-                console.log('win'+before, current_board_index);
+                //console.log('win'+before, current_board_index);
                     
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
@@ -71,8 +68,8 @@ function makeMove(cell, board) {
                 flag=true;
                 flag_2=false;
                 
-                console.log('win');
-                console.log(localBoardWinners);
+                //console.log('win');
+                //console.log(localBoardWinners);
 
             } else if (checkDraw(board)) {
                     alert('引き分け');
@@ -89,8 +86,8 @@ function makeMove(cell, board) {
                     flag=true;
                     flag_2=false;
 
-                    console.log('draw');
-                    console.log(localBoardWinners);
+                    //console.log('draw');
+                    //console.log(localBoardWinners);
             } else {
                 before = current_board_index;
                 currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
@@ -99,8 +96,8 @@ function makeMove(cell, board) {
                 flag=true;
                 flag_2=false;
                 
-                console.log(before, current_board_index);
-                console.log('else');
+                //console.log(before, current_board_index);
+                //console.log('else');
             }
             
             if (localBoardWinners[current_board_index] !== null){
@@ -108,8 +105,8 @@ function makeMove(cell, board) {
                 flag=false;
                 flag_2=true;
 
-                console.log(before, current_board_index);
-                console.log("abc");
+                //console.log(before, current_board_index);
+                //console.log("abc");
             }
             if(globalCheckWin()){
                 alert(currentPlayer+"の勝利！おめでとう！");
@@ -118,7 +115,7 @@ function makeMove(cell, board) {
                 alert("引き分け　お疲れさん！");
                 resetBoard();
             }
-            console.log(localBoardWinners);
+            //console.log(localBoardWinners);
         }
     }else{
         alert('指定のマス内でクリックしてください');
@@ -127,10 +124,8 @@ function makeMove(cell, board) {
 
 
 function checkWin(board) {
-    // boardのセルを取得
     const cells = board.querySelectorAll('.cell');
 
-    // 勝利条件のパターン
     const winPatterns = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横の勝利条件
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦の勝利条件
@@ -148,16 +143,7 @@ function checkWin(board) {
 
     return false;
 }
-/*
-function checkDraw() {
-    for (const cell of cells) {
-        if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
-            return false; 
-        }
-    }
-    return true; 
-}
-*/
+
 function checkDraw(board) {
     const cells = board.querySelectorAll('.cell');
     for (const cell of cells) {
@@ -192,15 +178,13 @@ function fillBoardWithWinner(board, winner) {
 }
 
 function globalCheckWin() {
-    // boardのセルを取得
 
     const cells = localBoardWinners;
     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-    // 勝利条件のパターン
     const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横の勝利条件
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦の勝利条件
-        [0, 4, 8], [2, 4, 6] // 斜めの勝利条件
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]
     ];
     for (const pattern of winPatterns) {
         const [a, b, c] = pattern;
@@ -291,7 +275,7 @@ function updateGameSelector() {
 
 const backButton = document.getElementById("back");
 backButton.addEventListener("click", () => {
-    window.location.href = "index.html"; // ゲーム画面に遷移
+    window.location.href = "index.html";
 });
 
 
