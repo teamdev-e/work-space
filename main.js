@@ -3,6 +3,7 @@ const cells = document.querySelectorAll('.cell');
 const gameSelector = document.getElementById('gameSelector');
 let savedGames = [];
 
+
 const gameModeForm = document.getElementById('gameModeForm');
 let isComputerPlayer = false;
 
@@ -17,13 +18,14 @@ if (savedGamesJSON) {
 }
 };
 
-
 gameModeForm.addEventListener('change', function() {
     const selectedMode = gameModeForm.elements['mode'].value;
     isComputerPlayer = (selectedMode === '1');
+
     if(selectedMode === '3'){
             window.location.href = "ulu_index.html"; // ゲーム画面に遷移
     }
+
     resetBoard();
 });
 
@@ -53,6 +55,7 @@ function makeMove(cell) {
                 turn.innerHTML=currentPlayer+"'s turn";
                 if (isComputerPlayer && currentPlayer === 'O') {
                     makeComputerMove();
+
                 }
             }
         }
@@ -159,7 +162,9 @@ gameSelector.addEventListener('change', function() {
     loadGame();
 });
 
+
 function play(){
     const bgm = document.getElementById("bgm");
     bgm.play();
 }
+
