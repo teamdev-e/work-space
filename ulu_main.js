@@ -172,6 +172,7 @@ function resetBoard() {
         cell.classList.remove('X', 'O','D');
     });
     currentPlayer = 'X';
+    turn.innerHTML="X's turn";
     smallBoards[current_board_index].classList.remove('next-board');
     flag=false;
     flag_2=false;
@@ -255,6 +256,7 @@ function loadGame() {
         let gameData = savedGames[selectedIndex];
         flag=gameData.recordFlag;
         flag_2=gameData.recordFlag_2;
+        currentPlayer=gameData.currentPlayer;
         if(flag){
             smallBoards[current_board_index].classList.remove('next-board');
             current_board_index = gameData.nextBoardIndex; 

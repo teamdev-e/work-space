@@ -133,6 +133,7 @@ function loadGame() {
     if (savedGames[selectedIndex]) {
         const gameData = savedGames[selectedIndex];
         currentPlayer = gameData.currentPlayer;
+        turn.innerHTML=currentPlayer+"'s turn";
         for (let i = 0; i < cells.length; i++) {
             cells[i].className = gameData.cellClasses[i];
         }
