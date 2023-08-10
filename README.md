@@ -1,4 +1,4 @@
-# Tic Tac Toe
+# [Tic Tac Toe](https://teamdev-e.github.io/work-space/)
 
 Tic Tac Toe とは三目並べです。  
 ３×３の升目の中に2人のプレイヤーが交互に「◯」と「×」を書き込みます。  
@@ -48,7 +48,7 @@ Ultimate Tic Tac Toe は３×３の格子状に並べられた Tic Tac Toeの勝
 このアプリは、ウェブブラウザで直接実行できるHTML/CSS/JavaScriptアプリです。特別なインストールは不要で、以下の手順で実行できます。
 
 1. リポジトリをクローンする。または、ZIPファイルをダウンロードして解凍する。
-2. ダウンロードしたフォルダの`game.html`フォルダを開く。
+2. ダウンロードしたフォルダの`index.html`フォルダを開く。
 <br/>
 
 
