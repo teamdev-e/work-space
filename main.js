@@ -34,6 +34,7 @@ cells.forEach(cell => {
 });
 
 function makeMove(cell) {
+    play();
     if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
         cell.classList.add(currentPlayer);
 
@@ -157,3 +158,8 @@ function updateGameSelector() {
 gameSelector.addEventListener('change', function() {
     loadGame();
 });
+
+function play(){
+    const bgm = document.getElementById("bgm");
+    bgm.play();
+}

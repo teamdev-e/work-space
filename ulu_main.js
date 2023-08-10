@@ -40,6 +40,7 @@ let localBoardWinners = [null, null, null, null, null, null, null, null, null];
 
 // ゲームの進行や結果表示を処理
 function makeMove(cell, board) {
+    play();
     if(board===smallBoards[current_board_index] || !flag){
         if (!cell.classList.contains('X') && !cell.classList.contains('O') &&!cell.classList.contains('D')) {
             if(flag){
@@ -297,3 +298,8 @@ backButton.addEventListener("click", () => {
 gameSelector.addEventListener('change', function() {
     loadGame();
 });
+
+function play(){
+    const bgm = document.getElementById("bgm");
+    bgm.play();
+}
