@@ -1,22 +1,27 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
 
-    <!--プレイヤー数の選択-->
+
     <form id="gameModeForm">
         <label>
-            <input type="radio" name="mode" value="1"> 1Player  
+            <input type="radio" name="mode" value="1"> 1人で遊ぶ
         </label>
         <label>
-            <input type="radio" name="mode" value="2" checked> 2Player  
+            <input type="radio" name="mode" value="2" checked> 2人で遊ぶ  
+        </label>
+        <label>
+            <input type="radio" name="mode" value="3"> Ultimateモードで対戦  
+
         </label>
     </form>
     
@@ -31,7 +36,14 @@
         <div class="cell" onclick="makeMove(this)"></div>
         <div class="cell" onclick="makeMove(this)"></div>
     </div>
-    <button class="reset-button" onclick="resetBoard()">リセット</button>
+    <div id="turn" class="turn"></div>
+    <button class="menu-button single" onclick="resetBoard()">リセット</button>
+    <button class="menu-button single" onclick="saveGame()">保存</button>
+    <select id="gameSelector" class="menu-button"></select>
+    <audio id="bgm" loop autoplay>
+        <source src="New_Composition_50.mp3" type="audio/mpeg">
+        Your browser dose not support the audio element.
+    </audio>
     <script src="main.js"></script>
 </body>
 </html>

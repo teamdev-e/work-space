@@ -35,7 +35,7 @@ body {
     background-color: #d0d0d0;
 }
 
-.reset-button {
+.menu-button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -49,4 +49,14 @@ body {
 
 .reset-button:hover {
     background-color: #0056b3;
+}
+
+.turn,h1{
+    margin: 2vh;
+    font-family: "Arial Black","Times New Roman", Times, sans-serif;
+    font-size: large;
+}
+
+.menu-button:active{
+    background-color: #dae335;
 }

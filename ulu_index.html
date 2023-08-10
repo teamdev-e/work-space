@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="ulu_style.css">
+    <title>Ultimate Tic Tac Toe</title>
+</head>
+<body>
+    <h1>Ultimate Tic Tac Toe</h1>
+    <div class="ultimate-tic-tac-toe board">
+        <div class="first_row">
+            <div class="small_board board1 local_board">
+                <div class="cell 00" onclick="makeMove(this,board1)"></div>
+                <div class="cell 01" onclick="makeMove(this,board1)"></div>
+                <div class="cell 02" onclick="makeMove(this,board1)"></div>
+                <div class="cell 03" onclick="makeMove(this,board1)"></div>
+                <div class="cell 04" onclick="makeMove(this,board1)"></div>
+                <div class="cell 05" onclick="makeMove(this,board1)"></div>
+                <div class="cell 06" onclick="makeMove(this,board1)"></div>
+                <div class="cell 07" onclick="makeMove(this,board1)"></div>
+                <div class="cell 08" onclick="makeMove(this,board1)"></div>
+            </div>
+            <div class="small_board board2 local_board">
+                <div class="cell 10" onclick="makeMove(this,board2)"></div>
+                <div class="cell 11" onclick="makeMove(this,board2)"></div>
+                <div class="cell 12" onclick="makeMove(this,board2)"></div>
+                <div class="cell 13" onclick="makeMove(this,board2)"></div>
+                <div class="cell 14" onclick="makeMove(this,board2)"></div>
+                <div class="cell 15" onclick="makeMove(this,board2)"></div>
+                <div class="cell 16" onclick="makeMove(this,board2)"></div>
+                <div class="cell 17" onclick="makeMove(this,board2)"></div>
+                <div class="cell 18" onclick="makeMove(this,board2)"></div>
+            </div>
+            <div class="small_board board3 local_board">
+                <div class="cell 20" onclick="makeMove(this,board3)"></div>
+                <div class="cell 21" onclick="makeMove(this,board3)"></div>
+                <div class="cell 22" onclick="makeMove(this,board3)"></div>
+                <div class="cell 23" onclick="makeMove(this,board3)"></div>
+                <div class="cell 24" onclick="makeMove(this,board3)"></div>
+                <div class="cell 25" onclick="makeMove(this,board3)"></div>
+                <div class="cell 26" onclick="makeMove(this,board3)"></div>
+                <div class="cell 27" onclick="makeMove(this,board3)"></div>
+                <div class="cell 28" onclick="makeMove(this,board3)"></div>
+            </div>
+        </div>
+        <div class="second_row">
+            <div class="small_board board4 local_board">
+                <div class="cell 30" onclick="makeMove(this,board4)"></div>
+                <div class="cell 31" onclick="makeMove(this,board4)"></div>
+                <div class="cell 32" onclick="makeMove(this,board4)"></div>
+                <div class="cell 33" onclick="makeMove(this,board4)"></div>
+                <div class="cell 34" onclick="makeMove(this,board4)"></div>
+                <div class="cell 35" onclick="makeMove(this,board4)"></div>
+                <div class="cell 36" onclick="makeMove(this,board4)"></div>
+                <div class="cell 37" onclick="makeMove(this,board4)"></div>
+                <div class="cell 38" onclick="makeMove(this,board4)"></div>
+            </div>
+            <div class="small_board board5 local_board">
+                <div class="cell 40" onclick="makeMove(this,board5)"></div>
+                <div class="cell 41" onclick="makeMove(this,board5)"></div>
+                <div class="cell 42" onclick="makeMove(this,board5)"></div>
+                <div class="cell 43" onclick="makeMove(this,board5)"></div>
+                <div class="cell 44" onclick="makeMove(this,board5)"></div>
+                <div class="cell 45" onclick="makeMove(this,board5)"></div>
+                <div class="cell 46" onclick="makeMove(this,board5)"></div>
+                <div class="cell 47" onclick="makeMove(this,board5)"></div>
+                <div class="cell 48" onclick="makeMove(this,board5)"></div>
+            </div>
+            <div class="small_board board6 local_board">
+                <div class="cell 50" onclick="makeMove(this,board6)"></div>
+                <div class="cell 51" onclick="makeMove(this,board6)"></div>
+                <div class="cell 52" onclick="makeMove(this,board6)"></div>
+                <div class="cell 53" onclick="makeMove(this,board6)"></div>
+                <div class="cell 54" onclick="makeMove(this,board6)"></div>
+                <div class="cell 55" onclick="makeMove(this,board6)"></div>
+                <div class="cell 56" onclick="makeMove(this,board6)"></div>
+                <div class="cell 57" onclick="makeMove(this,board6)"></div>
+                <div class="cell 58" onclick="makeMove(this,board6)"></div>
+            </div>
+        </div>
+        <div class="third_row">
+            <div class="small_board board7 local_board">
+                <div class="cell 60" onclick="makeMove(this,board7)"></div>
+                <div class="cell 61" onclick="makeMove(this,board7)"></div>
+                <div class="cell 62" onclick="makeMove(this,board7)"></div>
+                <div class="cell 63" onclick="makeMove(this,board7)"></div>
+                <div class="cell 64" onclick="makeMove(this,board7)"></div>
+                <div class="cell 65" onclick="makeMove(this,board7)"></div>
+                <div class="cell 66" onclick="makeMove(this,board7)"></div>
+                <div class="cell 67" onclick="makeMove(this,board7)"></div>
+                <div class="cell 68" onclick="makeMove(this,board7)"></div>
+            </div>
+            <div class="small_board board8 local_board">
+                <div class="cell 70" onclick="makeMove(this,board8)"></div>
+                <div class="cell 71" onclick="makeMove(this,board8)"></div>
+                <div class="cell 72" onclick="makeMove(this,board8)"></div>
+                <div class="cell 73" onclick="makeMove(this,board8)"></div>
+                <div class="cell 74" onclick="makeMove(this,board8)"></div>
+                <div class="cell 75" onclick="makeMove(this,board8)"></div>
+                <div class="cell 76" onclick="makeMove(this,board8)"></div>
+                <div class="cell 77" onclick="makeMove(this,board8)"></div>
+                <div class="cell 78" onclick="makeMove(this,board8)"></div>
+            </div>
+            <div class="small_board board9 local_board">
+                <div class="cell 80" onclick="makeMove(this,board9)"></div>
+                <div class="cell 81" onclick="makeMove(this,board9)"></div>
+                <div class="cell 82" onclick="makeMove(this,board9)"></div>
+                <div class="cell 83" onclick="makeMove(this,board9)"></div>
+                <div class="cell 84" onclick="makeMove(this,board9)"></div>
+                <div class="cell 85" onclick="makeMove(this,board9)"></div>
+                <div class="cell 86" onclick="makeMove(this,board9)"></div>
+                <div class="cell 87" onclick="makeMove(this,board9)"></div>
+                <div class="cell 88" onclick="makeMove(this,board9)"></div>
+            </div>
+        </div>
+    </div>
+    <div id="turn" class="turn"></div>
+    <button class="menu-button" onclick="resetBoard()">リセット</button>
+    <button class="menu-button" onclick="saveGame()">保存</button>
+    <select id="gameSelector" class="menu-button"></select>
+    <button id="back" class="menu-button">戻る</button>
+    <audio id="bgm" loop autoplay>
+        <source src="New_Composition_91.mp3" type="audio/mpeg">
+        Your browser dose not support the audio element.
+    </audio>
+    <script src="ulu_main.js"></script>
+</body>
+</html>
