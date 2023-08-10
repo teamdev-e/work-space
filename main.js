@@ -93,7 +93,7 @@ function resetBoard() {
     if (isComputerPlayer && currentPlayer === 'O') {
         makeComputerMove();
     }
-
+    turn.innerHTML="X's turn";
 }
 
 function makeComputerMove() {
