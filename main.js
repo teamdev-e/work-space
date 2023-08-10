@@ -141,6 +141,9 @@ function loadGame() {
 
 function updateGameSelector() {
     gameSelector.innerHTML = '';
+    let option = document.createElement('option');
+    option.text = '保存一覧';
+    gameSelector.appendChild(option);
     for (let i = savedGames.length - 1; i >= 0; i--) {
     const option = document.createElement('option');
     option.value = i;
