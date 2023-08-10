@@ -12,7 +12,7 @@ const smallBoards = document.querySelectorAll('.small_board');
 const turn = document.getElementById("turn");
 turn.innerHTML="X's turn";
 
-const gameSelector = document.getElementById('gameSelector');
+gameSelector = document.getElementById('gameSelector');
 let savedGames = [];
 
 window.onload = function() {
@@ -35,7 +35,7 @@ const board8 = document.querySelector('.board8');
 const board9 = document.querySelector('.board9');
 
 // ローカルボードの勝者を保存する配列
-const localBoardWinners = [null, null, null, null, null, null, null, null, null];
+let localBoardWinners = [null, null, null, null, null, null, null, null, null];
 
 
 // ゲームの進行や結果表示を処理
@@ -224,14 +224,14 @@ function globalCheckDraw(){
 
 
 function saveGame() {
-    const timestamp = new Date().toLocaleString();
-    const gameData = {
+    let timestamp = new Date().toLocaleString();
+    let gameData = {
         timestamp: timestamp,
         currentPlayer: currentPlayer,
         cellClasses: Array.from(cells).map(cell => cell.className),
         nextBoardIndex: current_board_index, 
         recordBoards: smallBoards,
-        recordLocalBoardWinners: localBoardWinners,
+        recordLocalBoardWinners: localBoardWinners.slice(),
         recordFlag:flag,
         recordFlag2:flag_2
     };
@@ -244,15 +244,17 @@ function saveGame() {
     updateGameSelector();
 
     localStorage.setItem('ultimateTicTacToeSavedGames', JSON.stringify(savedGames));
+
+    console.log(gameData);
 }
 
 
 function loadGame() {
-    const selectedIndex = gameSelector.value;
+    let selectedIndex = gameSelector.value;
     if (savedGames[selectedIndex]) {
-        const gameData = savedGames[selectedIndex];
+        let gameData = savedGames[selectedIndex];
         flag=gameData.recordFlag;
-        flag_2=gameData.flag_2;
+        flag_2=gameData.recordFlag_2;
         if(flag){
             smallBoards[current_board_index].classList.remove('next-board');
             current_board_index = gameData.nextBoardIndex; 
@@ -264,7 +266,7 @@ function loadGame() {
         for (let i = 0; i < cells.length; i++) {
             cells[i].className = gameData.cellClasses[i];
         }
-        localBoardWinners = gameData.localBoardWinners; 
+        localBoardWinners = gameData.recordLocalBoardWinners.slice();
         turn.innerHTML = currentPlayer + "'s turn";
         console.log(localBoardWinners);
     }
@@ -272,9 +274,12 @@ function loadGame() {
 
 function updateGameSelector() {
     gameSelector.innerHTML = '';
+    let option = document.createElement('option');
+    option.text = '保存一覧';
+    gameSelector.appendChild(option);
     for (let i = savedGames.length - 1; i >= 0; i--) {
-    const option = document.createElement('option');
-    const gameData = savedGames[i];
+    let option = document.createElement('option');
+    let gameData = savedGames[i];
     option.value = i;
     option.text = `${savedGames.length - i}:保存日 ${gameData.timestamp}`;
     gameSelector.appendChild(option);
