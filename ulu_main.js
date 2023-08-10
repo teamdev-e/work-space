@@ -275,7 +275,7 @@ function updateGameSelector() {
 
 const backButton = document.getElementById("back");
 backButton.addEventListener("click", () => {
-    window.location.href = "index.html";
+    window.location.href = "game.html";
 });
 
 

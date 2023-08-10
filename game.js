@@ -23,7 +23,7 @@ gameModeForm.addEventListener('change', function() {
     isComputerPlayer = (selectedMode === '1');
 
     if(selectedMode === '3'){
-            window.location.href = "ulu_index.html"; // ゲーム画面に遷移
+            window.location.href = "ulu_index.html"; 
     }
 
     resetBoard();
