@@ -96,10 +96,13 @@ function resetBoard() {
         cell.classList.remove('X', 'O');
     });
     currentPlayer = 'X';
+    /*
     if (isComputerPlayer && currentPlayer === 'O') {
         makeComputerMove();
     }
+    */
     turn.innerHTML="X's turn";
+    //selectedMode = '1';
 }
 
 function makeComputerMove() {
