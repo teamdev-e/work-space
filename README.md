@@ -52,7 +52,7 @@ Ultimate Tic Tac Toe は３×３の格子状に並べられた Tic Tac Toeの勝
 <br/>
 
 ## 使用した画像
-このアプリで使用した画像は以下のサイトのものを使用しました。
+このアプリの画像は以下のサイトのものを使用しました。
 OKUMONO-背景フリー素材　[https://sozaino.site](https://sozaino.site)
 
 
