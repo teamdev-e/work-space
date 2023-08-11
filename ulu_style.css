@@ -83,11 +83,17 @@ body {
 
 
 .next-board {
-    border: 3px solid #0056b3;
+    border: 5px solid  #c81717;
 }
 
 .turn{
     margin: 2vh;
     font-family: "Arial Black","Times New Roman", Times, sans-serif;
     font-size: large;
+    color: white;
 }
+
+h1{
+    color: white;
+}
+

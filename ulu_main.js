@@ -51,7 +51,7 @@ function makeMove(cell, board) {
             //console.log(boards);
 
             if (checkWin(board)) {
-                alert(currentPlayer+'の勝利');
+                alert('このボードは'+currentPlayer+'の勝利');
                 fillBoardWithWinner(board, currentPlayer);
                 if (!flag_2){
                     localBoardWinners[before] = currentPlayer;
@@ -72,7 +72,7 @@ function makeMove(cell, board) {
                 //console.log(localBoardWinners);
 
             } else if (checkDraw(board)) {
-                    alert('引き分け');
+                    alert('このボードは引き分け');
                     fillBoardWithWinner(board, 'D');
                     if (!flag_2){
                         localBoardWinners[before] = '/';

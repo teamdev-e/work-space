@@ -58,8 +58,14 @@ body {
     margin: 2vh;
     font-family: "Arial Black","Times New Roman", Times, sans-serif;
     font-size: large;
+    color: white;
 }
 
 .menu-button:active{
     background-color: #dae335;
 }
+
+.variation{
+    color: white;
+}
+
