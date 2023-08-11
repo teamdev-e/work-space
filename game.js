@@ -10,6 +10,8 @@ let isComputerPlayer = false;
 const turn = document.getElementById("turn");
 turn.innerHTML="X's turn";
 
+let selectedMode = gameModeForm.elements['mode'].value;
+
 window.onload = function() {
 const savedGamesJSON = localStorage.getItem('ticTacToeSavedGames');
 if (savedGamesJSON) {
@@ -19,7 +21,7 @@ if (savedGamesJSON) {
 };
 
 gameModeForm.addEventListener('change', function() {
-    const selectedMode = gameModeForm.elements['mode'].value;
+    selectedMode = gameModeForm.elements['mode'].value;
     isComputerPlayer = (selectedMode === '1');
 
     if(selectedMode === '3'){
@@ -118,7 +120,9 @@ function saveGame() {
     const gameData = {
         timestamp: timestamp,
         currentPlayer: currentPlayer,
-        cellClasses: Array.from(cells).map(cell => cell.className)
+        cellClasses: Array.from(cells).map(cell => cell.className),
+        recordIsComputer: isComputerPlayer,
+        gameMode: selectedMode, 
     };
 
     savedGames.push(gameData);
@@ -138,6 +142,13 @@ function loadGame() {
         const gameData = savedGames[selectedIndex];
         currentPlayer = gameData.currentPlayer;
         turn.innerHTML=currentPlayer+"'s turn";
+        isComputerPlayer=gameData.recordIsComputer;
+        selectedMode=gameData.gameMode;
+        if (gameData.gameMode === '1') {
+            gameModeForm.elements['mode'].value = '1';
+        } else if (gameData.gameMode === '2') {
+            gameModeForm.elements['mode'].value = '2';
+        }
         for (let i = 0; i < cells.length; i++) {
             cells[i].className = gameData.cellClasses[i];
         }
