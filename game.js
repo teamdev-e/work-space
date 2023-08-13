@@ -39,6 +39,7 @@ cells.forEach(cell => {
 
 function makeMove(cell) {
     play();
+    updateGameSelector();
     if (!cell.classList.contains('X') && !cell.classList.contains('O')) {
         cell.classList.add(currentPlayer);
 

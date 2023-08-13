@@ -38,6 +38,7 @@ let localBoardWinners = [null, null, null, null, null, null, null, null, null];
 
 function makeMove(cell, board) {
     play();
+    updateGameSelector();
     if(board===smallBoards[current_board_index] || !flag){
         if (!cell.classList.contains('X') && !cell.classList.contains('O') &&!cell.classList.contains('D')) {
             if(flag){
